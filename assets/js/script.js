@@ -31,10 +31,11 @@ function runGame(gameType) {
 
     if (gameType ==="addition") {
         displayAdditionQuestion(num1,num2);
-    } else if(gameType === "multiply") {
+    } else if (gameType === "multiply") {
         displayMultiplyQuestion (num1, num2);
+    } else if (gameType === "subtract") {
+        displaySubtractQuestion (num1, num2);
     }
-
     else {
         alert(`Unknown game type: ${gameType}`);
         // Throws an error if game type is known
@@ -74,7 +75,9 @@ let operator = document.getElementById("operator").innerText;
 if (operator === "+") {
     return [operand1 + operand2, "addition"];
     } else if (operator ==="x") {
-        return [operand1 * operand2, "multiply"]
+        return [operand1 * operand2, "multiply"];
+    } else if (operator === "-") {
+        return [operand1 - operand2, "subtract"];
     }
     
     else {
@@ -105,9 +108,28 @@ function displayAdditionQuestion(operand1, operand2) {
 
 }
 
-function displaySubtractQuestion() {
+function displaySubtractQuestion(operand1, operand2) {
+    // If operand1 is larger than operand 2, then display operand 1 in html element, otherwise display operand2 (larger value)
+    document.getElementById("operand1").textContent = operand1 > operand2 ? operand1 : operand2;
+        // If operand1 is larger than operand 2, then display operand 2 in html element, otherwise display operand1 (smaller value)
+    document.getElementById("operand2").textContent = operand1 > operand2 ? operand2 : operand1;
+    document.getElementById("operator").textContent = "-";
 
 }
+
+//Cleaner version
+// function displaySubtractQuestion(operand1, operand2) {
+//     // Ensure operand1 is always the larger number
+//     if (operand1 < operand2) {
+//         [operand1, operand2] = [operand2, operand1]; // Swap if necessary
+//     }
+
+//     // Now, we can directly assign without rechecking the condition
+//     document.getElementById("operand1").textContent = operand1;
+//     document.getElementById("operand2").textContent = operand2;
+//     document.getElementById("operator").textContent = "-";
+// }
+
 
 function displayMultiplyQuestion(operand1, operand2) {
     document.getElementById("operand1").textContent = operand1;
